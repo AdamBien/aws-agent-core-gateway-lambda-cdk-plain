@@ -6,6 +6,9 @@ import software.amazon.awscdk.services.iam.ServicePrincipal;
 import software.amazon.awscdk.services.lambda.IFunction;
 import software.constructs.Construct;
 
+/**
+ * https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-bedrockagentcore-gateway.html
+ */
 public interface AgentCoreGateway {
 
     public static CfnGateway create(Construct scope, IFunction function){
