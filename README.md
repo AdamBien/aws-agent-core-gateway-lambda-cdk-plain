@@ -1,0 +1,1 @@
+# aws-quarkus-agent-core-gateway-cdk-plain
