@@ -1,5 +1,6 @@
 package airhacks;
 
+import airhacks.qacg.lambda.control.Functions;
 import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
@@ -13,12 +14,7 @@ public class AgentCoreGatewayStack
 
     public AgentCoreGatewayStack(Construct scope, String appName, StackProps stackProps) {
         super(scope, ConventionalDefaults.stackName(appName, "agent-core-gateway"), stackProps);
-        var agentArtifact = AgentRuntimeArtifact.fromAsset(ConventionalDefaults.dockerFilePath.toString());
-        var runtime = software.amazon.awscdk.services.bedrock.agentcore.alpha.Runtime.Builder.create(this, "AgentRuntime")
-                .runtimeName("QuarkusAgentRuntime")
-                .agentRuntimeArtifact(agentArtifact)
-                .networkConfiguration(RuntimeNetworkConfiguration.usingPublicNetwork())
-                .build();
+        Functions.createFunction(scope, appName, appName);
         var agentRuntimeId = runtime.getAgentRuntimeId();
         CfnOutput.Builder.create(this, "AgentRuntimeId").value(agentRuntimeId).build();
         var agentArn = runtime.getAgentRuntimeArn();
