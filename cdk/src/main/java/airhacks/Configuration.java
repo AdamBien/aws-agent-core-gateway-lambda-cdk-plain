@@ -6,7 +6,8 @@ import software.amazon.awscdk.StackProps;
 
 public record Configuration(String appName) {
 
- 
+        
+
         public StackProps stackProperties() {
                 ZCfg.load(appName);
                 var region = ZCfg.string("stack.props.region");
