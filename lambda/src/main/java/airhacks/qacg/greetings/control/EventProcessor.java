@@ -1,28 +1,20 @@
-package airhacks.lambda.example.control;
+package airhacks.qacg.greetings.control;
 
-import airhacks.lambda.example.entity.ExampleEvent;
-import airhacks.logging.control.Log;
+import airhacks.qacg.greetings.entity.BedrockGatewayEvent;
+import airhacks.qacg.logging.control.Log;
 
 /**
- * Processes domain events extracted from AWS service events.
- * Implements business logic for event handling.
+ * Processes domain events extracted from AWS Bedrock Agent Gateway.
  */
 public interface EventProcessor {
 
     /**
-     * Processes the domain event with business logic.
-     * Replace with actual processing logic for your domain.
      *
      * @param event domain event to process
      */
-    static void process(ExampleEvent event) {
+    static void process(BedrockGatewayEvent event) {
         Log.info("Processing domain event with payload: %s", event.payload());
 
-        // Implement actual business logic here:
-        // - Validate event data
-        // - Transform data
-        // - Call downstream services
-        // - ...
         Log.info("Domain event processed successfully");
     }
 }

@@ -1,10 +1,11 @@
-package airhacks.lambda.example.boundary;
+package airhacks.qacg.greetings.boundary;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import airhacks.lambda.example.entity.ExampleEvent;
+import airhacks.qacg.greetings.entity.BedrockGatewayEvent;
+
 
 /**
  * Tests event extraction logic.
@@ -12,7 +13,7 @@ import airhacks.lambda.example.entity.ExampleEvent;
  * from EventBridge, SNS, SQS, CodeBuild, etc. to ensure proper parsing and
  * transformation.
  */
-public class EventListenerTest {
+public class GatewayEventListenerTest {
 
     @Test
     void awsToDomainEventConversion() {
@@ -23,7 +24,7 @@ public class EventListenerTest {
                 }
                 """;
         var actualEvent = GatewayEventListener.extract(awsEvent);
-        var expectedEvent = new ExampleEvent(awsEvent);
+        var expectedEvent = new BedrockGatewayEvent(awsEvent);
         assertThat(actualEvent).isEqualTo(expectedEvent);
     }
 }

@@ -1,4 +1,4 @@
-package airhacks.lambda.example.boundary;
+package airhacks.qacg.greetings.boundary;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 

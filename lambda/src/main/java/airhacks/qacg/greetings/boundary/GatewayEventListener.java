@@ -1,8 +1,8 @@
-package airhacks.lambda.example.boundary;
+package airhacks.qacg.greetings.boundary;
 
-import airhacks.lambda.example.control.EventProcessor;
-import airhacks.lambda.example.entity.ExampleEvent;
-import airhacks.logging.control.Log;
+import airhacks.qacg.greetings.control.EventProcessor;
+import airhacks.qacg.greetings.entity.BedrockGatewayEvent;
+import airhacks.qacg.logging.control.Log;
 
 /**
 */
@@ -36,8 +36,8 @@ public class GatewayEventListener {
      * @param event AWS event
      * @return domain specific payload
      */
-    static ExampleEvent extract(Object event){
-        return new ExampleEvent(event.toString());
+    static BedrockGatewayEvent extract(Object event){
+        return new BedrockGatewayEvent(event.toString());
     }
     
 }

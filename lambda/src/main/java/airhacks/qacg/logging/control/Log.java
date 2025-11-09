@@ -1,4 +1,4 @@
-package airhacks.logging.control;
+package airhacks.qacg.logging.control;
 
 /**
  * Centralized logging for AWS Lambda functions.
