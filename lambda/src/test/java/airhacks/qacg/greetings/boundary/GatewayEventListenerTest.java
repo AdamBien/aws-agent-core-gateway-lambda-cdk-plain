@@ -23,7 +23,7 @@ public class GatewayEventListenerTest {
                     "payload:"test"
                 }
                 """;
-        var actualEvent = GatewayEventListener.extract(awsEvent);
+        var actualEvent = BedrockGatewayEventListener.extract(awsEvent);
         var expectedEvent = new BedrockGatewayEvent(awsEvent);
         assertThat(actualEvent).isEqualTo(expectedEvent);
     }

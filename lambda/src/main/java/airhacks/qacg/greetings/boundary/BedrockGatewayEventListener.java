@@ -6,11 +6,11 @@ import airhacks.qacg.logging.control.Log;
 
 /**
 */
-public class GatewayEventListener {
+public class BedrockGatewayEventListener {
     
     static String message = System.getenv("message");
 
-    public GatewayEventListener() {
+    public BedrockGatewayEventListener() {
         Log.info("initialized with configuration: %s", message);
     }
 
