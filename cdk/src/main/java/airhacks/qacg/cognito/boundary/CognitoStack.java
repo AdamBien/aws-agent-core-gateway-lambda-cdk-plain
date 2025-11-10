@@ -9,20 +9,26 @@ import software.constructs.Construct;
 
 public class CognitoStack extends Stack {
 
+    final String userPoolId;
+    final String userPoolClientId;
+
     public CognitoStack(Construct scope, String appName, StackProps stackProps) {
         super(scope, ConventionalDefaults.stackName(appName, "cognito"), stackProps);
 
         var userPool = UserPools.create(this);
         var userPoolClient = UserPools.createClient(this, userPool);
 
+        this.userPoolId = userPool.getUserPoolId();
+        this.userPoolClientId = userPoolClient.getUserPoolClientId();
+
         CfnOutput.Builder.create(this, "UserPoolId")
-                .value(userPool.getUserPoolId())
+                .value(userPoolId)
                 .description("Cognito User Pool ID")
                 .exportName(appName + "-UserPoolId")
                 .build();
 
         CfnOutput.Builder.create(this, "UserPoolClientId")
-                .value(userPoolClient.getUserPoolClientId())
+                .value(userPoolClientId)
                 .description("Cognito User Pool Client ID")
                 .exportName(appName + "-UserPoolClientId")
                 .build();
@@ -32,6 +38,14 @@ public class CognitoStack extends Stack {
                 .description("Cognito User Pool ARN")
                 .exportName(appName + "-UserPoolArn")
                 .build();
+    }
+
+    public String userPoolId() {
+        return userPoolId;
+    }
+
+    public String userPoolClientId() {
+        return userPoolClientId;
     }
 
 }
