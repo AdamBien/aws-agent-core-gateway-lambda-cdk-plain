@@ -29,5 +29,7 @@ public class AgentCoreGatewayStack extends Stack {
                 .value(gateway.getAttrGatewayIdentifier())
                 .description("Gateway ID")
                 .build();
+
+
     }
 }

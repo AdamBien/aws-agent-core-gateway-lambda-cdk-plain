@@ -5,6 +5,7 @@ import airhacks.acgl.cognito.control.UserPools;
 import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
+import software.amazon.awscdk.services.cognito.SignInUrlOptions;
 import software.constructs.Construct;
 
 public class CognitoStack extends Stack {
@@ -41,6 +42,12 @@ public class CognitoStack extends Stack {
                 .value(userPoolDomain.baseUrl())
                 .description("Cognito User Pool Domain")
                 .build();
+
+        CfnOutput.Builder.create(this, "UserSignUpURL")
+                .value(userPoolDomain.signInUrl(userPoolClient, SignInUrlOptions.builder().redirectUri("https://example.com").build()))
+                .description("User signup URL")
+                .build();
+
     }
 
     public String userPoolId() {
