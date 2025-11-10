@@ -17,6 +17,7 @@ public class CognitoStack extends Stack {
 
         var userPool = UserPools.create(this);
         var userPoolClient = UserPools.createClient(this, userPool);
+        var userPoolDomain = UserPools.createUserPoolDomain(this, userPool, appName);
 
         this.userPoolId = userPool.getUserPoolId();
         this.userPoolClientId = userPoolClient.getUserPoolClientId();
@@ -34,6 +35,11 @@ public class CognitoStack extends Stack {
         CfnOutput.Builder.create(this, "UserPoolArn")
                 .value(userPool.getUserPoolArn())
                 .description("Cognito User Pool ARN")
+                .build();
+
+        CfnOutput.Builder.create(this, "UserPoolDomain")
+                .value(userPoolDomain.baseUrl())
+                .description("Cognito User Pool Domain")
                 .build();
     }
 

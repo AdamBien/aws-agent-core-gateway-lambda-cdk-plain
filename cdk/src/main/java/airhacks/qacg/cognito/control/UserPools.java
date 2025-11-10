@@ -2,8 +2,13 @@ package airhacks.qacg.cognito.control;
 
 import software.amazon.awscdk.services.cognito.UserPool;
 import software.amazon.awscdk.services.cognito.UserPoolClient;
+import software.amazon.awscdk.services.cognito.UserPoolDomain;
+import software.amazon.awscdk.services.cognito.UserVerificationConfig;
+import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.services.cognito.AuthFlow;
+import software.amazon.awscdk.services.cognito.AutoVerifiedAttrs;
+import software.amazon.awscdk.services.cognito.CognitoDomainOptions;
 import software.amazon.awscdk.services.cognito.Mfa;
 import software.amazon.awscdk.services.cognito.OAuthFlows;
 import software.amazon.awscdk.services.cognito.OAuthSettings;
@@ -48,5 +53,21 @@ public interface UserPools {
                                                 .build())
                                 .build();
         }
+
+    static UserPoolDomain createUserPoolDomain(Construct scope, UserPool userPool, String domainPrefix) {
+        var domain = UserPoolDomain.Builder.create(scope, domainPrefix + "-domain")
+                .userPool(userPool)
+                .cognitoDomain(CognitoDomainOptions.builder()
+                        .domainPrefix(domainPrefix)
+                        .build())
+                .build();
+
+        CfnOutput.Builder.create(scope, domainPrefix + "-domain-url")
+                .value(domain.baseUrl())
+                .description("Cognito Hosted UI Domain")
+                .build();
+
+        return domain;
+    }        
 
 }
