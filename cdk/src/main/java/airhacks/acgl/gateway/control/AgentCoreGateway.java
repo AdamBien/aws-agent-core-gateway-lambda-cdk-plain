@@ -19,7 +19,7 @@ public interface AgentCoreGateway {
 
     static CfnGateway create(Construct scope, IFunction function, String region, String userPoolId, String userPoolClientId){
         var gatewayRole = Role.Builder.create(scope, "GatewayRole")
-                .assumedBy(ServicePrincipal.Builder.create("bedrock.amazonaws.com").build())
+                .assumedBy(ServicePrincipal.Builder.create("bedrock-agentcore.amazonaws.com").build())
                 .build();
 
         function.grantInvoke(gatewayRole);
@@ -33,7 +33,7 @@ public interface AgentCoreGateway {
         // Add resource-based policy to Lambda to allow Gateway service principal
         function.addPermission("AllowBedrockGateway",
                 Permission.builder()
-                        .principal(ServicePrincipal.Builder.create("bedrock.amazonaws.com").build())
+                        .principal(ServicePrincipal.Builder.create("bedrock-agentcore.amazonaws.com").build())
                         .action("lambda:InvokeFunction")
                         .build());
 
