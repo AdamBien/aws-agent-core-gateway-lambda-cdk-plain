@@ -13,4 +13,8 @@ public interface ConventionalDefaults {
     static String stackName(String appName, String stackName) {
         return "%s-%s-stack".formatted(appName, stackName);
     }
+
+    static String mainStackName(String appName) {
+        return stackName(appName, "main");
+    }
 }

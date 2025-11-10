@@ -12,7 +12,7 @@ public class AgentCoreGatewayStack extends Stack {
             
 
     public AgentCoreGatewayStack(Construct scope, String appName, String userPoolId, String userPoolClientId, StackProps stackProps) {
-        super(scope, ConventionalDefaults.stackName(appName, "agent-core-gateway"), stackProps);
+        super(scope, ConventionalDefaults.mainStackName(appName), stackProps);
 
         var functionName = "airhacks_BedrockGatewayEventListener";
         var functionHandler = ConventionalDefaults.functionHandler;
