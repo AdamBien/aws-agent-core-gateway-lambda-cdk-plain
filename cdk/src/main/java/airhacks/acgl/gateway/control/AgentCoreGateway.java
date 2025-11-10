@@ -45,6 +45,7 @@ public interface AgentCoreGateway {
                 .authorizerConfiguration(authConfig)
                 .protocolType(ProtocolType.MCP.value())
                 .roleArn(gatewayRole.getRoleArn())
+                .exceptionLevel("DEBUG")
                 .build();
     }
 
