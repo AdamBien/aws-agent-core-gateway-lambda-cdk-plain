@@ -23,7 +23,38 @@ AWS CDK-based infrastructure provisioning AWS Bedrock Agent Core Gateway integra
 
 ### Cognito Hosted UI
 
-Access the Cognito login page (available in CDK outputs as `<domainPrefix>-domain-url`):
+To Access the signup/login page use the value of the output: `agent-core-gateway-lambda-cognito-stack.UserSignUpURL`
+
+The Hosted UI handles OAuth implicit grant flow and returns the JWT token in the URL fragment after authentication.
+
+
+
+### CLI-Based Authentication
+
+Obtain JWT token programmatically:
+```bash
+aws cognito-idp initiate-auth \
+  --auth-flow USER_PASSWORD_AUTH \
+  --client-id <client-id> \
+  --auth-parameters USERNAME=<email>,PASSWORD=<password> \
+  --query 'AuthenticationResult.IdToken' \
+  --output text
 ```
-https://<domain-prefix>.auth.<region>.amazoncognito.com/login?client_id=<client-id>&response_type=token&redirect_uri=<redirect-uri>
+
+### Calling the MCP Server
+
+Invoke the Agent Core Gateway with the bearer token:
+
+```bash
+TOKEN="<your-jwt-token>"
+GATEWAY_URL="<agent-core-gateway-url>"
+
+curl -X POST "${GATEWAY_URL}" \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "your": "payload"
+  }'
 ```
+
+The gateway authenticates requests using the Cognito JWT token and forwards events to the Lambda function for processing.
