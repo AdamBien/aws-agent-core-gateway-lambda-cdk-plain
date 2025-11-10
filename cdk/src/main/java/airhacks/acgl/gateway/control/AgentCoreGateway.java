@@ -5,6 +5,7 @@ import software.amazon.awscdk.services.iam.PolicyStatement;
 import software.amazon.awscdk.services.iam.Role;
 import software.amazon.awscdk.services.iam.ServicePrincipal;
 import software.amazon.awscdk.services.lambda.IFunction;
+import software.amazon.awscdk.services.lambda.Permission;
 import software.constructs.Construct;
 import java.util.List;
 
@@ -28,6 +29,13 @@ public interface AgentCoreGateway {
                 .resources(List.of(function.getFunctionArn()))
                 .build();
         gatewayRole.addToPolicy(lambdaInvokePolicy);
+
+        // Add resource-based policy to Lambda to allow Gateway service principal
+        function.addPermission("AllowBedrockGateway",
+                Permission.builder()
+                        .principal(ServicePrincipal.Builder.create("bedrock.amazonaws.com").build())
+                        .action("lambda:InvokeFunction")
+                        .build());
 
         var discoveryUrl = String.format("https://cognito-idp.%s.amazonaws.com/%s/.well-known/openid-configuration",
                 region,
