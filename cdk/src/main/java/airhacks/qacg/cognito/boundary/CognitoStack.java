@@ -24,19 +24,16 @@ public class CognitoStack extends Stack {
         CfnOutput.Builder.create(this, "UserPoolId")
                 .value(userPoolId)
                 .description("Cognito User Pool ID")
-                .exportName(appName + "-UserPoolId")
                 .build();
 
         CfnOutput.Builder.create(this, "UserPoolClientId")
                 .value(userPoolClientId)
                 .description("Cognito User Pool Client ID")
-                .exportName(appName + "-UserPoolClientId")
                 .build();
 
         CfnOutput.Builder.create(this, "UserPoolArn")
                 .value(userPool.getUserPoolArn())
                 .description("Cognito User Pool ARN")
-                .exportName(appName + "-UserPoolArn")
                 .build();
     }
 
