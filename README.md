@@ -21,11 +21,9 @@ AWS CDK-based infrastructure provisioning AWS Bedrock Agent Core Gateway integra
 
 ## Testing
 
-After deployment, the stack outputs provide the necessary endpoints and identifiers:
+### Cognito Hosted UI
 
-1. **Create Cognito User**: Use AWS Console or CLI to create a user in the Cognito User Pool
-2. **Authenticate**: Obtain JWT token via Cognito USER_PASSWORD_AUTH flow using the User Pool Client ID
-3. **Invoke Gateway**: Call the Agent Core Gateway URL with the JWT token in the Authorization header
-
-The Lambda function processes incoming events and returns responses through the Bedrock Agent Core Gateway with Cognito authorization.
-
+Access the Cognito login page (available in CDK outputs as `<domainPrefix>-domain-url`):
+```
+https://<domain-prefix>.auth.<region>.amazoncognito.com/login?client_id=<client-id>&response_type=token&redirect_uri=<redirect-uri>
+```
