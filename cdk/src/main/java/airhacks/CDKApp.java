@@ -1,6 +1,8 @@
 package airhacks;
 
+import airhacks.qacg.cognito.boundary.CognitoStack;
 import software.amazon.awscdk.App;
+import software.amazon.awscdk.Fn;
 import software.amazon.awscdk.Tags;
 
 public interface CDKApp {
@@ -16,7 +18,10 @@ public interface CDKApp {
         var configuration = new Configuration(appName);
         var stackProps = configuration.stackProperties();
 
-        new AgentCoreGatewayStack(app, appName, stackProps);
+        new CognitoStack(app, appName, stackProps);
+        var userPoolId = Fn.importValue(appName + "-UserPoolId");
+        var userPoolClientId = Fn.importValue(appName + "-UserPoolClientId");
+        new AgentCoreGatewayStack(app, appName, userPoolId,userPoolClientId,stackProps);
         app.synth();
     }
 }
