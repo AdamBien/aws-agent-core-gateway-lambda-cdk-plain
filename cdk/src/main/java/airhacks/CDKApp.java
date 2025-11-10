@@ -1,11 +1,11 @@
 package airhacks;
 
-import airhacks.qacg.cognito.boundary.CognitoStack;
+import airhacks.acgl.cognito.boundary.CognitoStack;
 import software.amazon.awscdk.App;
 import software.amazon.awscdk.Tags;
 
 public interface CDKApp {
-    String appName = "quarkus-agent-core-gateway";
+    String appName = "agent-core-gateway-lambda";
 
     static void main(String... args) {
 
