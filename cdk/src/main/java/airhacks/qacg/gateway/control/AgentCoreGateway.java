@@ -1,6 +1,7 @@
 package airhacks.qacg.gateway.control;
 
 import airhacks.qacg.gateway.entity.AuthorizerType;
+import airhacks.qacg.gateway.entity.ProtocolType;
 import software.amazon.awscdk.services.bedrockagentcore.CfnGateway;
 import software.amazon.awscdk.services.iam.Role;
 import software.amazon.awscdk.services.iam.ServicePrincipal;
@@ -25,7 +26,7 @@ public interface AgentCoreGateway {
         return CfnGateway.Builder.create(scope, "AgentCoreGateway")
                 .name("quarkus-agent-core-gateway")
                 .authorizerType(AuthorizerType.CUSTOM_JWT.value())
-                .protocolType("MCP")
+                .protocolType(ProtocolType.MCP.value())
                 .roleArn(gatewayRole.getRoleArn())
                 .build();
     }
