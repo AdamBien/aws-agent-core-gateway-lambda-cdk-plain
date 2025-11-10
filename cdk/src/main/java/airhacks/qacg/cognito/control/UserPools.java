@@ -5,6 +5,7 @@ import software.amazon.awscdk.services.cognito.UserPoolClient;
 import software.amazon.awscdk.services.cognito.UserPoolDomain;
 import software.amazon.awscdk.services.cognito.UserVerificationConfig;
 import software.amazon.awscdk.CfnOutput;
+import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.services.cognito.AuthFlow;
 import software.amazon.awscdk.services.cognito.AutoVerifiedAttrs;
@@ -51,6 +52,7 @@ public interface UserPools {
                                                                 .implicitCodeGrant(true)
                                                                 .build())
                                                 .build())
+                                .accessTokenValidity(Duration.hours(8))
                                 .build();
         }
 
