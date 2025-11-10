@@ -1,6 +1,7 @@
 package airhacks.acgl.gateway.control;
 
 import software.amazon.awscdk.services.bedrockagentcore.CfnGateway;
+import software.amazon.awscdk.services.iam.PolicyStatement;
 import software.amazon.awscdk.services.iam.Role;
 import software.amazon.awscdk.services.iam.ServicePrincipal;
 import software.amazon.awscdk.services.lambda.IFunction;
@@ -21,6 +22,12 @@ public interface AgentCoreGateway {
                 .build();
 
         function.grantInvoke(gatewayRole);
+
+        var lambdaInvokePolicy = PolicyStatement.Builder.create()
+                .actions(List.of("lambda:InvokeFunction"))
+                .resources(List.of(function.getFunctionArn()))
+                .build();
+        gatewayRole.addToPolicy(lambdaInvokePolicy);
 
         var discoveryUrl = String.format("https://cognito-idp.%s.amazonaws.com/%s/.well-known/openid-configuration",
                 region,
