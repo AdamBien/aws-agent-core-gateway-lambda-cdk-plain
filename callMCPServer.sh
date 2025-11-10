@@ -19,6 +19,18 @@ else
     curl -X POST "$GATEWAY_URL" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Content-Type: application/json" \
-        -d '{"message": "test event from MCP client"}' \
+        -d '{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "test-client",
+      "version": "1.0.0"
+    }
+  }
+}' \
         -w "\n\nHTTP Status: %{http_code}\n"
 fi
