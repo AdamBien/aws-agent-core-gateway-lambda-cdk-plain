@@ -1,4 +1,4 @@
-package airhacks.qacg.gateway.control;
+package airhacks.acgl.gateway.control;
 
 import software.amazon.awscdk.services.bedrockagentcore.CfnGateway;
 import software.amazon.awscdk.services.bedrockagentcore.CfnGatewayTarget;

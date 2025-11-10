@@ -1,8 +1,8 @@
 package airhacks;
 
-import airhacks.qacg.gateway.control.AgentCoreGateway;
-import airhacks.qacg.gateway.control.AgentCoreGatewayTarget;
-import airhacks.qacg.lambda.control.Functions;
+import airhacks.acgl.gateway.control.AgentCoreGateway;
+import airhacks.acgl.gateway.control.AgentCoreGatewayTarget;
+import airhacks.acgl.lambda.control.Functions;
 import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;

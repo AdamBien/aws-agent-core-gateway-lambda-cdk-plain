@@ -1,4 +1,4 @@
-package airhacks.qacg.cognito.control;
+package airhacks.acgl.cognito.control;
 
 import software.amazon.awscdk.services.cognito.UserPool;
 import software.amazon.awscdk.services.cognito.UserPoolClient;

@@ -1,7 +1,7 @@
-package airhacks.qacg.cognito.boundary;
+package airhacks.acgl.cognito.boundary;
 
 import airhacks.ConventionalDefaults;
-import airhacks.qacg.cognito.control.UserPools;
+import airhacks.acgl.cognito.control.UserPools;
 import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;

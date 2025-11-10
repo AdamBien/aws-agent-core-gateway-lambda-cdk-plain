@@ -1,13 +1,14 @@
-package airhacks.qacg.gateway.control;
+package airhacks.acgl.gateway.control;
 
-import airhacks.qacg.gateway.entity.AuthorizerType;
-import airhacks.qacg.gateway.entity.ProtocolType;
 import software.amazon.awscdk.services.bedrockagentcore.CfnGateway;
 import software.amazon.awscdk.services.iam.Role;
 import software.amazon.awscdk.services.iam.ServicePrincipal;
 import software.amazon.awscdk.services.lambda.IFunction;
 import software.constructs.Construct;
 import java.util.List;
+
+import airhacks.acgl.gateway.entity.AuthorizerType;
+import airhacks.acgl.gateway.entity.ProtocolType;
 
 /**
  * https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-bedrockagentcore-gateway.html
