@@ -3,6 +3,7 @@ package airhacks.qacg.greetings.boundary;
 import airhacks.qacg.greetings.control.EventProcessor;
 import airhacks.qacg.greetings.entity.BedrockGatewayEvent;
 import airhacks.qacg.logging.control.Log;
+import java.util.Map;
 
 /**
 */
@@ -18,26 +19,28 @@ public class BedrockGatewayEventListener {
      * Lambda function entry point - handles incoming AWS service events.
      * This method is invoked by the Lambda runtime for each event trigger.
      *
-     * @param awsEvent AWS service event (EventBridge, SNS, SQS, etc.)
+     * @param awsEvent AWS service event containing name parameter
+     * @return greeting message
      */
-    public void onEvent(Object awsEvent) {
+    public String onEvent(Map<String, Object> awsEvent) {
         Log.info("event received: %s", awsEvent);
         var domainEvent = extract(awsEvent);
         Log.info("event converted: %s", domainEvent);
-        EventProcessor.process(domainEvent);
+        var result = EventProcessor.process(domainEvent);
         Log.info("event processed: %s", domainEvent);
+        return result;
     }
 
     /**
      * Transforms AWS service event into domain-specific representation.
-     * Implement actual parsing logic based on the specific AWS service event structure
-     * (e.g., EventBridge detail, SNS Message, SQS body, CodeBuild state change)
+     * Extracts the name parameter from the event.
      *
-     * @param event AWS event
-     * @return domain specific payload
+     * @param event AWS event containing name parameter
+     * @return domain specific event with name
      */
-    static BedrockGatewayEvent extract(Object event){
-        return new BedrockGatewayEvent(event.toString());
+    static BedrockGatewayEvent extract(Map<String, Object> event){
+        var name = event.getOrDefault("name", "World").toString();
+        return new BedrockGatewayEvent(name);
     }
     
 }

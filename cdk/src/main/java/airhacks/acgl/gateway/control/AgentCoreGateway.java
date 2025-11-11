@@ -16,6 +16,9 @@ import airhacks.acgl.gateway.entity.ProtocolType;
  */
 public interface AgentCoreGateway {
 
+        /**
+         * https://aws.github.io/bedrock-agentcore-starter-toolkit/user-guide/runtime/permissions.md
+         */
     static CfnGateway create(Construct scope, IFunction function, String region, String userPoolId, String userPoolClientId){
         var gatewayRole = Role.Builder.create(scope, "GatewayRole")
                 .assumedBy(ServicePrincipal.Builder.create("bedrock-agentcore.amazonaws.com").build())
