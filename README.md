@@ -4,7 +4,7 @@ AWS CDK-based infrastructure provisioning AWS Bedrock Agent Core Gateway integra
 
 ## Architecture
 
-- **Lambda Function**: Event-driven handler processing incoming AWS service events
+- **Lambda Function**: Event-driven handler processing incoming AWS service events and returning personalized greetings
 - **Agent Core Gateway**: Bedrock Agent Core Gateway with Cognito-based authentication
 - **Cognito User Pool**: Dedicated authentication stack for API access control
 
@@ -46,15 +46,12 @@ aws cognito-idp initiate-auth \
 Invoke the Agent Core Gateway with the bearer token:
 
 ```bash
-TOKEN="<your-jwt-token>"
-GATEWAY_URL="<agent-core-gateway-url>"
-
-curl -X POST "${GATEWAY_URL}" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "your": "payload"
-  }'
+./callMCPServer.sh <gateway-url> <jwt-token>
 ```
 
-The gateway authenticates requests using the Cognito JWT token and forwards events to the Lambda function for processing.
+Or with a custom payload file:
+```bash
+./callMCPServer.sh <gateway-url> <jwt-token> payload.json
+```
+
+The gateway validates the token and forwards events to the Lambda function for processing.
