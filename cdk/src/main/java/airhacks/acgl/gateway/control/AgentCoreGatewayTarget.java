@@ -7,17 +7,14 @@ import software.constructs.Construct;
 
 import java.util.List;
 
+import airhacks.acgl.gateway.entity.ToolSchema;
+
 public interface AgentCoreGatewayTarget {
 
     static CfnGatewayTarget create(Construct scope, CfnGateway gateway, IFunction function) {
         var inputSchema = CfnGatewayTarget.SchemaDefinitionProperty.builder()
                 .type("object")
-                .properties(java.util.Map.of(
-                        "name", java.util.Map.of(
-                                "type", "string",
-                                "description", "The name of the person to greet"
-                        )
-                ))
+                .properties(ToolSchema.create())
                 .required(List.of("name"))
                 .build();
 
