@@ -12,11 +12,18 @@ public interface AgentCoreGatewayTarget {
     static CfnGatewayTarget create(Construct scope, CfnGateway gateway, IFunction function) {
         var inputSchema = CfnGatewayTarget.SchemaDefinitionProperty.builder()
                 .type("object")
+                .properties(java.util.Map.of(
+                        "name", java.util.Map.of(
+                                "type", "string",
+                                "description", "The name of the person to greet"
+                        )
+                ))
+                .required(List.of("name"))
                 .build();
 
         var toolDefinition = CfnGatewayTarget.ToolDefinitionProperty.builder()
-                .name("mcp-tool")
-                .description("MCP Lambda tool")
+                .name("greet")
+                .description("Returns a greeting message with the provided name")
                 .inputSchema(inputSchema)
                 .build();
 
