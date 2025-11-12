@@ -4,7 +4,8 @@ public interface ConventionalDefaults {
     int memory = 1769;
     int timeout = 30;
 
-    public static String functionHandler = functionHandler("airhacks.qacg.greetings.boundary.BedrockGatewayEventListener");
+    String functionHandler = functionHandler("airhacks.qacg.greetings.boundary.BedrockGatewayEventListener");
+    String functionName = "airhacks_BedrockGatewayEventListener";
 
     static String functionHandler(String fqn) {
         return fqn + "::onEvent";

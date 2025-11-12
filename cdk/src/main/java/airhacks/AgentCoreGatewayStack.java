@@ -11,10 +11,9 @@ import software.constructs.Construct;
 public class AgentCoreGatewayStack extends Stack {
             
 
-    public AgentCoreGatewayStack(Construct scope, String appName, String userPoolId, String userPoolClientId, StackProps stackProps) {
+    public AgentCoreGatewayStack(Construct scope, String appName, String functionName,String userPoolId, String userPoolClientId, StackProps stackProps) {
         super(scope, ConventionalDefaults.mainStackName(appName), stackProps);
 
-        var functionName = "airhacks_BedrockGatewayEventListener";
         var functionHandler = ConventionalDefaults.functionHandler;
         var function = Functions.createFunction(this, functionName, functionHandler);
         var gateway = AgentCoreGateway.create(this, function, this.getRegion(), userPoolId, userPoolClientId);

@@ -20,7 +20,8 @@ public interface CDKApp {
         var cognitoStack = new CognitoStack(app, appName, stackProps);
         var userPoolId = cognitoStack.userPoolId();
         var userPoolClientId = cognitoStack.userPoolClientId();
-        new AgentCoreGatewayStack(app, appName, userPoolId, userPoolClientId, stackProps);
+        var functionName = ConventionalDefaults.functionName;
+        new AgentCoreGatewayStack(app, appName, userPoolId, userPoolClientId, functionName,stackProps);
         app.synth();
     }
 }
