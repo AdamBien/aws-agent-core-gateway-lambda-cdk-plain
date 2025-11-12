@@ -37,7 +37,7 @@ aws cognito-idp initiate-auth \
   --auth-flow USER_PASSWORD_AUTH \
   --client-id <client-id> \
   --auth-parameters USERNAME=<email>,PASSWORD=<password> \
-  --query 'AuthenticationResult.IdToken' \
+  --query 'AuthenticationResult.AccessToken' \
   --output text
 ```
 
@@ -55,3 +55,13 @@ Or with a custom payload file:
 ```
 
 The gateway validates the token and forwards events to the Lambda function for processing.
+
+### Using MCP Inspector
+
+Test the endpoint interactively with the Model Context Protocol inspector:
+
+```bash
+npx @modelcontextprotocol/inspector <gateway-url>
+```
+
+The inspector provides a web interface for exploring available tools, sending requests, and inspecting responses. Authentication tokens can be configured in the inspector's settings.
