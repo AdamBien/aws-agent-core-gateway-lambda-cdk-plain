@@ -9,6 +9,8 @@ A serverless remote MCP server that exposes a Lambda POJO via the MCP protocol.
 - **Agent Core Gateway**: Bedrock Agent Core Gateway with Cognito-based authentication
 - **Cognito User Pool**: Dedicated authentication stack for API access control
 
+![Overview](overview.png)
+
 ## Modules
 
 - [cdk](cdk/) - AWS CDK infrastructure definitions
