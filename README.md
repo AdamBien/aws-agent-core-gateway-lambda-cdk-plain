@@ -14,53 +14,65 @@ A serverless remote MCP server that exposes a Lambda POJO via the MCP protocol.
 - [cdk](cdk/) - AWS CDK infrastructure definitions
 - [lambda](lambda/) - Lambda function implementation
 
+## Prerequisites
+
+- JDK 21 or later
+- Apache Maven
+- AWS CDK bootstrapped in target region:
+  ```bash
+  cdk bootstrap aws://ACCOUNT-ID/REGION
+  ```
+
 ## Deployment
 
 ```bash
 ./buildAndDeployDontAsk.sh
 ```
 
-## Testing
+## Connecting to the MCP Server
 
-### Cognito Hosted UI
+### Step-by-Step Authentication Flow
 
-To Access the signup/login page use the value of the output: `agent-core-gateway-lambda-cognito-stack.UserSignUpURL`
+1. **Deploy the Infrastructure**
+   ```bash
+   ./buildAndDeployDontAsk.sh
+   ```
 
-The Hosted UI handles OAuth implicit grant flow and returns the JWT token in the URL fragment after authentication.
+2. **Create a User Account**
+   - Navigate to the Cognito Hosted UI using the `agent-core-gateway-lambda-cognito-stack.UserSignUpURL` output
+   - Sign up with email and password
+   - Verify email address if required
 
-### CLI-Based Authentication
+3. **Obtain JWT Token**
 
-Obtain JWT token programmatically:
-```bash
-aws cognito-idp initiate-auth \
-  --auth-flow USER_PASSWORD_AUTH \
-  --client-id <client-id> \
-  --auth-parameters USERNAME=<email>,PASSWORD=<password> \
-  --query 'AuthenticationResult.AccessToken' \
-  --output text
-```
+   **Option A: Via Hosted UI**
+   - Sign in through the Hosted UI
+   - Extract the JWT token from the URL fragment after authentication (OAuth implicit grant flow)
 
-### Calling the MCP Server
+   **Option B: Via AWS CLI**
+   ```bash
+   aws cognito-idp initiate-auth \
+     --auth-flow USER_PASSWORD_AUTH \
+     --client-id <client-id> \
+     --auth-parameters USERNAME=<email>,PASSWORD=<password> \
+     --query 'AuthenticationResult.AccessToken' \
+     --output text
+   ```
 
-Invoke the Agent Core Gateway with the bearer token:
+4. **Access the MCP Server**
 
-```bash
-./callMCPServer.sh <gateway-url> <jwt-token>
-```
+   Use the JWT token to invoke the Agent Core Gateway:
+   ```bash
+   ./callMCPServer.sh <gateway-url> <jwt-token>
+   ```
 
-Or with a custom payload file:
-```bash
-./callMCPServer.sh <gateway-url> <jwt-token> payload.json
-```
+   Or with a custom payload:
+   ```bash
+   ./callMCPServer.sh <gateway-url> <jwt-token> payload.json
+   ```
 
-The gateway validates the token and forwards events to the Lambda function for processing.
-
-### Using MCP Inspector
-
-Test the endpoint interactively with the Model Context Protocol inspector:
-
-```bash
-npx @modelcontextprotocol/inspector <gateway-url>
-```
-
-The inspector provides a web interface for exploring available tools, sending requests, and inspecting responses. Authentication tokens can be configured in the inspector's settings.
+5. **Interactive Testing with MCP Inspector**
+   ```bash
+   npx @modelcontextprotocol/inspector <gateway-url>
+   ```
+   Configure the JWT token in the inspector's authentication settings to explore available tools and test requests interactively.
