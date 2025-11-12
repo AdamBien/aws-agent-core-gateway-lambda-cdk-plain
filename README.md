@@ -1,6 +1,7 @@
-# AWS Agent Core Gateway with Lambda
+# AWS Agent Core Gateway with POJO Lambda
 
-AWS CDK-based infrastructure provisioning AWS Bedrock Agent Core Gateway integrated with AWS Lambda and Amazon Cognito authentication.
+A serverless remote MCP server that exposes a Lambda POJO via the MCP protocol.
+
 
 ## Architecture
 
@@ -26,8 +27,6 @@ AWS CDK-based infrastructure provisioning AWS Bedrock Agent Core Gateway integra
 To Access the signup/login page use the value of the output: `agent-core-gateway-lambda-cognito-stack.UserSignUpURL`
 
 The Hosted UI handles OAuth implicit grant flow and returns the JWT token in the URL fragment after authentication.
-
-
 
 ### CLI-Based Authentication
 
