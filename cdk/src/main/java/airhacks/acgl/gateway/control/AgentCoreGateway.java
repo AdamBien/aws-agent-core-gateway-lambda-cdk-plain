@@ -50,6 +50,7 @@ public interface AgentCoreGateway {
          */
         return CfnGateway.Builder.create(scope, "AgentCoreGatewayLambda")
                 .name("agent-core-gateway-lambda")
+                .description("routes greetings-related requests to a POJO lambda")
                 .authorizerType(AuthorizerType.CUSTOM_JWT.value())
                 .authorizerConfiguration(authConfig)
                 .protocolType(ProtocolType.MCP.value())
