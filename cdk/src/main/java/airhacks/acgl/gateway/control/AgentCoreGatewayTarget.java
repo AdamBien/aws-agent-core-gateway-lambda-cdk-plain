@@ -49,7 +49,7 @@ public interface AgentCoreGatewayTarget {
                 .build();
 
         return CfnGatewayTarget.Builder.create(scope, "AgentCoreGatewayTarget")
-                .name("quarkus-agent-target")
+                .name("lambda-gatewqy-target")
                 .gatewayIdentifier(gateway.getAttrGatewayIdentifier())
                 .targetConfiguration(targetConfig)
                 .credentialProviderConfigurations(List.of(credentialProvider))

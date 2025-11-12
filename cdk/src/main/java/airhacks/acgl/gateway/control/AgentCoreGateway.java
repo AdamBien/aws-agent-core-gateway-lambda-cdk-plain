@@ -48,8 +48,8 @@ public interface AgentCoreGateway {
          * https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-bedrockagentcore-gateway.html#cfn-bedrockagentcore-gateway-authorizertype
          * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-bedrockagentcore-gateway.html#cfn-bedrockagentcore-gateway-protocoltype
          */
-        return CfnGateway.Builder.create(scope, "AgentCoreGateway")
-                .name("quarkus-agent-core-gateway")
+        return CfnGateway.Builder.create(scope, "AgentCoreGatewayLambda")
+                .name("agent-core-gateway-lambda")
                 .authorizerType(AuthorizerType.CUSTOM_JWT.value())
                 .authorizerConfiguration(authConfig)
                 .protocolType(ProtocolType.MCP.value())
