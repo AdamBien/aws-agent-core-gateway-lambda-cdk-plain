@@ -19,7 +19,7 @@ public class AgentCoreGatewayStackTest {
     @Test
     public void testStack() throws IOException {
         App app = new App();
-        var stack = new AgentCoreGatewayStack(app, "test","userPoolId","userPoolClientId", StackProps.builder().build());
+        var stack = new AgentCoreGatewayStack(app, "test","functionName","userPoolId","userPoolClientId", StackProps.builder().build());
 
         // synthesize the stack to a CloudFormation template
         var actual = JSON.valueToTree(app.synth().getStackArtifact(stack.getArtifactId()).getTemplate());
