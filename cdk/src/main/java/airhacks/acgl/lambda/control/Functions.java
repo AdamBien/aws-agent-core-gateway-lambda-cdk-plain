@@ -19,7 +19,7 @@ public interface Functions{
 
     static Function createFunction(Construct app,String functionName,String functionHandler, Map<String,String> configuration, int memory, int timeout) {
         return Function.Builder.create(app, functionName)
-                .runtime(Runtime.JAVA_21)
+                .runtime(Runtime.JAVA_25)
                 .architecture(Architecture.ARM_64)
                 .code(Code.fromAsset("../lambda/target/function.jar"))
                 .handler(functionHandler)
